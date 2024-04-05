@@ -33,12 +33,25 @@
 
         <ng-container matColumnDef="imagen">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Imagen </mat-header-cell>
-            <mat-cell *matCellDef="let product" data-label="Imagen"> {{ product.imagen }} </mat-cell>
+            <mat-cell *matCellDef="let product" data-label="Imagen">
+                <picture class="flex items-center justify-end ">
+                    <source [srcset]="product.imagen" type="image/webp" />
+                    <source [srcset]="product.imagen" type="image/jpeg" />
+                    <img [src]="product.imagen" alt="Imagen de {{ product.nombre }}"
+                        class="w-12 h-12 border rounded-md" />
+                </picture>
+            </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="etiquetas">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Etiquetas </mat-header-cell>
-            <mat-cell *matCellDef="let product" data-label="Etiquetas"> {{ product.etiquetas }} </mat-cell>
+            <mat-cell *matCellDef="let product" data-label="Etiquetas">
+                <div class="flex items-center justify-end ">
+                    <mat-chip-listbox>
+                        <mat-chip *ngFor="let tag of product.etiquetas" class="text-xs">{{ tag }}</mat-chip>
+                    </mat-chip-listbox>
+                </div>
+            </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="precio">
@@ -63,8 +76,6 @@
                         <mat-icon>edit</mat-icon>
                     </button>
                 </section>
-                <!-- <a [routerLink]="['/products', product.id]"> View </a>
-                <a [routerLink]="['/products', product.id, 'edit']"> Edit </a> -->
             </mat-cell>
         </ng-container>
 

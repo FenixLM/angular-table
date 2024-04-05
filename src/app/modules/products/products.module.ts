@@ -8,6 +8,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatPaginatorModule,
     MatIconModule,
     MatButtonModule,
+    MatChipsModule
   ]
 })
 export class ProductsModule { }

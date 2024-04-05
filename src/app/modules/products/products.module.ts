@@ -9,6 +9,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -18,11 +22,17 @@ import { MatChipsModule } from '@angular/material/chips';
   imports: [
     CommonModule,
     ProductsRoutingModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatTableModule,
     MatPaginatorModule,
     MatIconModule,
     MatButtonModule,
-    MatChipsModule
+    MatChipsModule,
+    MatTooltipModule
+
+
   ]
 })
 export class ProductsModule { }

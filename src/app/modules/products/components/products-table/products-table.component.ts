@@ -24,6 +24,10 @@ export class ProductsTableComponent implements OnInit {
 
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.productsSource.filter = filterValue.trim().toLowerCase();
+  }
 
   getProducts(): void {
     this.loading = true;

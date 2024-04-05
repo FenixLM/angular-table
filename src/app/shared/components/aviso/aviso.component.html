@@ -1,0 +1,18 @@
+<div class="text-center m-4 p-4">
+  <mat-icon *ngIf="data.iconFont" class="text-primary">{{ data.iconFont }}</mat-icon>
+
+  <h3 class="uppercase my-2" *ngIf="data.titulo">
+    <strong>{{ data.titulo }} </strong>
+  </h3>
+  <hr />
+  <P class="my-4" *ngIf="data.mensaje">{{ data.mensaje }}</P>
+  <div *ngIf="data.img" class="imgVer">
+    <img [src]="data.img" class="mt-2" />
+  </div>
+  <div class="mt-8">
+    <a class="bg-primary text-white px-4 py-2 rounded-md cursor-pointer" type="button" (click)="onNoClick($event)">
+      Cerrar
+    </a>
+  </div>
+
+</div>

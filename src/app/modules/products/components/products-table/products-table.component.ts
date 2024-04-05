@@ -2,6 +2,8 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ProductInterface } from '../../interfaces/products.interface';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { ProductFormComponent } from '../product-form/product-form.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-products-table',
@@ -13,7 +15,9 @@ export class ProductsTableComponent implements OnInit {
   @Input() loading: boolean = false;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  constructor() {
+  constructor(
+    private dialog: MatDialog
+  ) {
   }
 
   displayedColumns: string[] = ['nombre', 'descripcion', 'sku', 'imagen', 'etiquetas', 'precio', 'stock', 'actions'];
@@ -37,6 +41,33 @@ export class ProductsTableComponent implements OnInit {
       this.productsSource.paginator = this.paginator!;
       this.paginator!._intl.itemsPerPageLabel = 'Productos por página';
     }, 2000);
+  }
+
+  openDialogCreate() {
+    const dialogRef = this.dialog.open(ProductFormComponent, {
+      width: '600px',
+    });
+  }
+
+  openDialogDetail(product: ProductInterface) {
+    const dialogRef = this.dialog.open(ProductFormComponent, {
+      width: '600px',
+      data: { product }
+    });
+  }
+
+  openDialogEdit(product: ProductInterface) {
+    const dialogRef = this.dialog.open(ProductFormComponent, {
+      width: '600px',
+      data: { product }
+    });
+  }
+
+  openDialogDelete(product: ProductInterface) {
+    const dialogRef = this.dialog.open(ProductFormComponent, {
+      width: '600px',
+      data: { product }
+    });
   }
 
 

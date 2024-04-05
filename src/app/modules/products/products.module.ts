@@ -13,11 +13,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ProductFormComponent } from './components/product-form/product-form.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     ProductsComponent,
-    ProductsTableComponent
+    ProductsTableComponent,
+    ProductFormComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +33,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatIconModule,
     MatButtonModule,
     MatChipsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule
 
 
   ]

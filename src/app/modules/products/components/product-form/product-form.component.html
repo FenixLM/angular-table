@@ -1,0 +1,55 @@
+<div class="md:max-w-[600px] mx-auto">
+    <h3 class="form--title" *ngIf="data && data.title">{{ data.title }}</h3>
+
+    <mat-dialog-content>
+        <form [formGroup]="formGroup" (ngSubmit)="guardarData()">
+
+            <div class="grid">
+                <mat-form-field appearance="outline">
+                    <mat-label>nombre</mat-label>
+                    <input matInput type="text" formControlName="nombre" required />
+                </mat-form-field>
+
+
+                <mat-form-field appearance="outline">
+                    <mat-label>descripcion</mat-label>
+                    <textarea matInput formControlName="descripcion" required></textarea>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>sku</mat-label>
+                    <input matInput type="text" formControlName="sku" required />
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>imagen</mat-label>
+                    <input matInput type="text" formControlName="imagen" required />
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>etiquetas</mat-label>
+                    <input matInput type="text" formControlName="etiquetas" required />
+                </mat-form-field>
+            </div>
+
+
+            <div class="grid md:grid-cols-2 gap-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>precio</mat-label>
+                    <input matInput type="text" formControlName="precio" required />
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>stock</mat-label>
+                    <input matInput type="text" formControlName="stock" required />
+                </mat-form-field>
+            </div>
+
+            <div class="flex justify-center mt-4">
+                <button mat-raised-button color="primary" type="submit" [disabled]="!formGroup.valid">
+                    Guardar
+                </button>
+            </div>
+        </form>
+    </mat-dialog-content>
+</div>

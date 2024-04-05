@@ -11,7 +11,8 @@
             <input matInput (keyup)="applyFilter($event)">
         </mat-form-field>
 
-        <button mat-raised-button color="primary" [routerLink]="['/products', 'new']">Nuevo producto</button>
+        <button mat-raised-button color="primary" (click)="openDialogCreate()" class="w-full md:w-1/3">Nuevo
+            producto</button>
     </div>
 
 
@@ -76,13 +77,16 @@
             <mat-cell *matCellDef="let product" data-label="Acciones">
                 <section>
 
-                    <button mat-icon-button color="primary" matTooltip="Vista de detalle" matTooltipPosition="below">
+                    <button mat-icon-button color="primary" matTooltip="Vista de detalle" matTooltipPosition="below"
+                        (click)="openDialogDetail(product)">
                         <mat-icon>visibility</mat-icon>
                     </button>
-                    <button mat-icon-button color="accent" matTooltip="Editar producto" matTooltipPosition="below">
+                    <button mat-icon-button color="accent" matTooltip="Editar producto" matTooltipPosition="below"
+                        (click)="openDialogEdit(product)">
                         <mat-icon>edit</mat-icon>
                     </button>
-                    <button mat-icon-button color="warn" matTooltip="Eliminar producto" matTooltipPosition="below">
+                    <button mat-icon-button color="warn" matTooltip="Eliminar producto" matTooltipPosition="below"
+                        (click)="openDialogDelete(product)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </section>

@@ -1,0 +1,20 @@
+<div class="alerta__container">
+  <mat-icon *ngIf="data.iconFont" color="primary">{{ data.iconFont }}</mat-icon>
+
+  <h3 class="alerta__container--title" *ngIf="data.titulo">
+    <strong>{{ data.titulo }} </strong>
+  </h3>
+  <hr />
+  <P *ngIf="data.mensaje">{{ data.mensaje }}</P>
+  <div *ngIf="data.img" class="imgVer">
+    <img [src]="data.img" class="mt-2" />
+  </div>
+  <div class="btn--alerta">
+    <button mat-stroked-button (click)="aceptar()" color="primary">
+      Aceptar
+    </button>
+    <button mat-raised-button (click)="onNoClick()" color="primary">
+      Cancelar
+    </button>
+  </div>
+</div>

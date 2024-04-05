@@ -1,0 +1,50 @@
+.alerta__container {
+    margin: 0.2rem;
+    text-align: center;
+    .mat-icon {
+      font-size: 50px;
+      height: 50px;
+      width: 50px;
+    }
+    &--title {
+      text-transform: uppercase;
+    }
+    .imgVer {
+      width: 400px;
+      height: auto;
+      overflow: hidden;
+    }
+  
+    .imgVer img {
+      width: 100%;
+      height: auto;
+    }
+  
+    @media screen and (max-width: 960px) {
+      .imgVer {
+        width: 250px !important;
+        height: auto;
+        overflow: hidden;
+        margin: auto;
+      }
+      .imgVer img {
+        width: 100%;
+        height: auto;
+      }
+    }
+    .btn--alerta {
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+  
+    @supports (object-fit: cover) {
+      .imgVer img {
+        height: 100%;
+        object-fit: contain;
+        object-position: center center;
+      }
+    }
+  }
+  

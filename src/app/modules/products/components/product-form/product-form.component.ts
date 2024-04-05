@@ -21,8 +21,8 @@ export class ProductFormComponent {
     this.formatForm();
     console.log(this.data);
 
-    if (data && data.cliente) {
-      this.formGroup.patchValue(this.data.producto);
+    if (data && data.product) {
+      this.formGroup.patchValue(this.data.product);
     }
   }
 

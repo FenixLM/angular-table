@@ -15,12 +15,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
     ProductsComponent,
     ProductsTableComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ProductDetailComponent
   ],
   imports: [
     CommonModule,

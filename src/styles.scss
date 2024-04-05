@@ -1,1 +1,295 @@
-/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+@import "./scss/variable.scss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@include mat.core();
+
+$front-colocapayments-primary: mat.define-palette(mat.$green-palette);
+$front-colocapayments-accent: mat.define-palette(mat.$amber-palette, 600);
+
+$front-colocapayments-warn: mat.define-palette(mat.$red-palette);
+
+$front-colocapayments-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $front-colocapayments-primary,
+      accent: $front-colocapayments-accent,
+      warn: $front-colocapayments-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($front-colocapayments-theme);
+
+@layer reset, table;
+
+@layer reset {
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: #e5e7eb;
+  }
+  html,
+  body {
+    height: 100%;
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  dl,
+  dd,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  hr,
+  figure,
+  p,
+  pre {
+    margin: 0;
+  }
+
+  ol,
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  img,
+  svg,
+  video,
+  canvas,
+  audio,
+  iframe,
+  embed,
+  object {
+    display: block;
+  }
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  blockquote {
+    border-left: 3px solid;
+    margin: 10px 0;
+    padding-left: 10px;
+  }
+}
+
+@layer table {
+  // .contImg {
+  //   width: 60px;
+  //   height: 60px;
+  //   overflow: hidden;
+  // }
+
+  // .contImg img {
+  //   width: 100%;
+  //   height: auto;
+  // }
+
+  mat-header-cell {
+    display: flex;
+    justify-content: center;
+  }
+
+  mat-cell,
+  mat-footer-cell {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .table {
+    &__container {
+      &--header {
+        margin: 1rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        justify-content: space-between;
+        text-align: center;
+      }
+
+      &--nav {
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        background-color: $primary;
+        color: white;
+      }
+
+      &--table {
+        margin-top: 1rem;
+        box-shadow: 3px 32px 82px -10px rgba(0, 0, 0, 0.78);
+        -webkit-box-shadow: 3px 32px 82px -10px rgba(0, 0, 0, 0.78);
+        -moz-box-shadow: 3px 32px 82px -10px rgba(0, 0, 0, 0.78);
+      }
+
+      &--filter {
+        padding: 0.8rem 1rem 0.5rem 1rem;
+        display: grid !important;
+        grid-template-columns: 1fr;
+      }
+    }
+
+    &__btns {
+      margin: 0.5rem;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  mat-header-cell {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    width: 28% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  @media screen and (max-width: 960px) {
+    .contImg {
+      width: 50px;
+      height: 50px;
+      overflow: hidden;
+      margin-left: auto;
+      margin-right: 0px !important;
+    }
+
+    .contImg img {
+      width: 100%;
+      height: auto;
+    }
+
+    .mat-mdc-header-row {
+      display: none !important;
+    }
+
+    .mat-mdc-table {
+      border: 0;
+      vertical-align: middle;
+      min-width: auto !important;
+      // margin: 1rem;
+    }
+
+    .mat-mdc-table caption {
+      font-size: 1em;
+    }
+
+    .mat-mdc-row {
+      min-height: auto;
+      padding-top: 1rem;
+    }
+
+    .mat-mdc-table .mat-mdc-header-cell {
+      border: 10px solid;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+
+    .mat-mdc-table .mat-mdc-row {
+      border-bottom: 5px solid #ddd;
+      display: block !important;
+    }
+
+    .mat-mdc-header-row {
+      min-height: 0px;
+    }
+
+    .mat-mdc-table .mat-mdc-cell {
+      border-bottom: 1px solid #ddd;
+      display: block !important;
+      font-size: 1em;
+      text-align: right !important;
+
+      height: auto;
+      margin-bottom: 2%;
+    }
+
+    .mat-mdc-table .mat-mdc-cell:before {
+      content: attr(data-label);
+      float: left !important;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 0.85em;
+    }
+
+    .mat-mdc-table .mat-mdc-cell:last-child {
+      border-bottom: 0;
+      padding-right: 0px;
+      color: #990000;
+      border-bottom: 1px solid #990000 !important;
+    }
+
+    .mat-mdc-table .mat-mdc-cell:first-child {
+      margin-top: 4%;
+      padding-left: 0px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .table {
+      &__container {
+        margin: 1rem;
+        padding: 0rem;
+
+        mat-table {
+          padding: 1rem;
+        }
+
+        &--nav {
+          padding: 0.5rem 1rem;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          background-color: $primary;
+          color: white;
+
+          h3 {
+            margin: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+
+  @supports (object-fit: cover) {
+    .contImg img {
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .contImg img {
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+  }
+}

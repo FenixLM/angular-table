@@ -1,0 +1,78 @@
+<ng-container>
+    <div class="table__container--nav">
+        <mat-icon>assignment_turned_in</mat-icon>
+        <h3 class="m-2">List Products</h3>
+    </div>
+
+    <div class="flex justify-end items-center mt-4">
+        <button mat-raised-button color="primary" [routerLink]="['/products', 'new']">Nuevo producto</button>
+
+    </div>
+
+    <mat-table [dataSource]="productsSource" matSort class="table__container--table">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+            <mat-cell *matCellDef="let product" data-label="ID"> {{ product.id }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="nombre">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+            <mat-cell *matCellDef="let product" data-label="Nombre"> {{ product.nombre }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="descripcion">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </mat-header-cell>
+            <mat-cell *matCellDef="let product" class="line-clamp-3" data-label="Descripción"> {{ product.descripcion }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="sku">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> SKU </mat-header-cell>
+            <mat-cell *matCellDef="let product" data-label="SKU"> {{ product.sku }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="imagen">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Imagen </mat-header-cell>
+            <mat-cell *matCellDef="let product" data-label="Imagen"> {{ product.imagen }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="etiquetas">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Etiquetas </mat-header-cell>
+            <mat-cell *matCellDef="let product" data-label="Etiquetas"> {{ product.etiquetas }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="precio">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Precio </mat-header-cell>
+            <mat-cell *matCellDef="let product" data-label="Precio"> {{ product.precio | currency }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="stock">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Stock </mat-header-cell>
+            <mat-cell *matCellDef="let product" data-label="Stock"> {{ product.stock }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+            <mat-cell *matCellDef="let product" data-label="Acciones">
+                <section>
+
+                    <button mat-icon-button color="primary">
+                        <mat-icon>visibility</mat-icon>
+                    </button>
+                    <button mat-icon-button color="accent">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </section>
+                <!-- <a [routerLink]="['/products', product.id]"> View </a>
+                <a [routerLink]="['/products', product.id, 'edit']"> Edit </a> -->
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+
+    <mat-paginator class="col-12" [pageSizeOptions]="[5, 10]" showFirstLastButtons>
+    </mat-paginator>
+</ng-container>

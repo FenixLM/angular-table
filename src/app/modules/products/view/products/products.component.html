@@ -5,6 +5,7 @@
 
 <div class="flex justify-center m-2 ">
     <div class="container mt-4 ">
-        <app-products-table [products]="products" [loading]="loading"></app-products-table>
+        <app-products-table [products]="products" [loading]="loading"
+            (deleteProduct)="handleDeleteProductChange($event)" (dialogClosed)="onDialogClosed()"></app-products-table>
     </div>
 </div>

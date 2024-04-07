@@ -14,8 +14,28 @@ export class ProductService {
     return products;
   }
 
-  saveProduct(product: any) {
-    console.log('Product created', product);
-    return this.http.post(`${environment.apiUrl}/products`, product);
+  saveProduct(productFormData: any, productId?: string) {
+    const etiquetas = productFormData.get('etiquetas');
+    console.log(etiquetas);
+
+    if (productId) {
+      // Si hay un ID de producto, es una actualización
+      return this.http.put(
+        `${environment.apiUrl}/products/${productId}`,
+        productFormData
+      );
+    } else {
+      // Si no hay un ID de producto, es una creación
+      return this.http.post(`${environment.apiUrl}/products`, productFormData);
+    }
+    // console.log(product);
+
+    // if (product._id) {
+    //   return this.http.put(
+    //     `${environment.apiUrl}/products/${product._id}`,
+    //     product
+    //   );
+    // }
+    // return this.http.post(`${environment.apiUrl}/products`, product);
   }
 }

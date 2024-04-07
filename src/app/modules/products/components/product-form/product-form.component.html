@@ -32,10 +32,27 @@
                     </span>
                 </div>
 
-                <mat-form-field appearance="outline">
+                <!-- <mat-form-field appearance="outline">
                     <mat-label>etiquetas</mat-label>
                     <input matInput type="text" formControlName="etiquetas" required />
+                </mat-form-field> -->
+
+                <mat-form-field appearance="outline">
+                    <mat-chip-grid #chipList>
+                        <mat-chip *ngFor="let etiqueta of etiquetas" [removable]="true"
+                            (removed)="removerEtiqueta(etiqueta)">
+                            {{ etiqueta }}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                        <input #etiquetasInput matInput [matChipInputFor]="chipList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                            (matChipInputTokenEnd)="agregarEtiqueta($event)" (blur)="onInputBlur($event)"
+                            placeholder="Etiquetas">
+
+                    </mat-chip-grid>
                 </mat-form-field>
+
+
             </div>
 
 

@@ -8,6 +8,8 @@ import {
 import { AvisoComponent } from 'src/app/shared/components/aviso/aviso.component';
 import { ProductService } from '../../services/product.service';
 import { FormDataService } from 'src/app/shared/services/form-data.service';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { COMMA, ENTER, SPACE } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-product-form',
@@ -17,7 +19,10 @@ import { FormDataService } from 'src/app/shared/services/form-data.service';
 export class ProductFormComponent {
   formGroup!: FormGroup;
   selectedFileName: string | undefined;
+  etiquetas: string[] = [];
+  productId: string | undefined;
 
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA, SPACE];
   constructor(
     private matDialog: MatDialog,
     public formBuilder: FormBuilder,
@@ -33,30 +38,33 @@ export class ProductFormComponent {
       this.formGroup.patchValue(this.data.product);
       const imgpath = this.data.product.imagen;
       this.selectedFileName = imgpath ? imgpath.split('/').pop() : undefined;
+      this.etiquetas = this.data.product.etiquetas || [];
+      this.productId = this.data.product._id;
     }
   }
 
   formatForm() {
     this.formGroup = this.formBuilder.group({
-      _id: [],
       nombre: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
       sku: ['', [Validators.required]],
       imagen: [''],
-      etiquetas: ['', [Validators.required]],
+      etiquetas: [[]],
       precio: [0, [Validators.required]],
       stock: [0, [Validators.required]],
-      imageFile: [null],
+      imageFile: [],
     });
   }
 
   ngOnInit(): void {}
 
   guardarData() {
+    console.log(this.formGroup.value);
+
     const formData = this.formDataService.convertToFormData(this.formGroup);
 
-    this.productService.saveProduct(formData).subscribe({
-      next: (resp: any) => {
+    this.productService.saveProduct(formData, this.productId).subscribe({
+      next: (resp) => {
         this.matDialogRef.close();
         this.aviso('done', '¡Éxito!', 'Producto guardado con éxito');
       },
@@ -80,6 +88,44 @@ export class ProductFormComponent {
       }
     }
   }
+
+  onInputBlur(event: any) {
+    const inputValue = event.target.value;
+    if ((inputValue || '').trim()) {
+      this.etiquetas.push(inputValue.trim());
+      this.actualizarValorEtiquetas();
+      event.target.value = '';
+    }
+  }
+
+  agregarEtiqueta(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || '').trim()) {
+      this.etiquetas.push(value.trim());
+      this.actualizarValorEtiquetas();
+    }
+
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  removerEtiqueta(etiqueta: string): void {
+    const index = this.etiquetas.indexOf(etiqueta);
+    if (index >= 0) {
+      this.etiquetas.splice(index, 1);
+      this.actualizarValorEtiquetas();
+    }
+  }
+
+  actualizarValorEtiquetas(): void {
+    console.log(this.etiquetas);
+
+    this.formGroup.patchValue({ etiquetas: this.etiquetas });
+  }
+
   closeDialog() {
     this.matDialogRef.close();
   }

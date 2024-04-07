@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Output } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
@@ -35,7 +35,6 @@ export class ProductDetailComponent {
     }
   }
 
-  ngOnInit(): void {}
   openDialogEdit(product: ProductInterface) {
     const dialogRef = this.dialog.open(ProductFormComponent, {
       width: '600px',
@@ -43,7 +42,7 @@ export class ProductDetailComponent {
       disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(result => {
       result && this.dialogService.dialogClosed.emit({ refresh: true });
     });
   }
@@ -60,10 +59,10 @@ export class ProductDetailComponent {
       disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(result => {
       if (result.aceptar) {
         this.productService.deleteProduct(product._id!).subscribe({
-          next: (resp) => {
+          next: resp => {
             console.log(resp);
             this.closeDialog();
             this.aviso(
@@ -73,7 +72,7 @@ export class ProductDetailComponent {
             );
             this.dialogService.dialogClosed.emit({ refresh: true });
           },
-          error: (err) => {
+          error: err => {
             console.error(err);
           },
         });

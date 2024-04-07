@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   MatDialogRef,
@@ -56,15 +56,13 @@ export class ProductFormComponent {
     });
   }
 
-  ngOnInit(): void {}
-
   guardarData() {
     console.log(this.formGroup.value);
 
     const formData = this.formDataService.convertToFormData(this.formGroup);
 
     this.productService.saveProduct(formData, this.productId).subscribe({
-      next: (resp) => {
+      next: resp => {
         this.matDialogRef.close(true);
         this.aviso('done', '¡Éxito!', 'Producto guardado con éxito');
       },

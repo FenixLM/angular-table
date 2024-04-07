@@ -22,7 +22,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     ProductsComponent,
     ProductsTableComponent,
     ProductFormComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -36,9 +36,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     MatButtonModule,
     MatChipsModule,
     MatTooltipModule,
-    MatDialogModule
-
-
-  ]
+    MatDialogModule,
+  ],
 })
-export class ProductsModule { }
+export class ProductsModule {}

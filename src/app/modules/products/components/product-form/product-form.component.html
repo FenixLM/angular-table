@@ -1,76 +1,90 @@
 <div class="md:max-w-[600px] mx-auto mt-4">
-    <h3 class="text-center" *ngIf="data && data.title">{{ data.title }}</h3>
+  <h3 class="text-center" *ngIf="data && data.title">{{ data.title }}</h3>
 
-    <mat-dialog-content>
-        <form [formGroup]="formGroup" (ngSubmit)="guardarData()">
+  <mat-dialog-content>
+    <form [formGroup]="formGroup" (ngSubmit)="guardarData()">
+      <div class="grid">
+        <mat-form-field appearance="outline">
+          <mat-label>nombre</mat-label>
+          <input matInput type="text" formControlName="nombre" required />
+        </mat-form-field>
 
-            <div class="grid">
-                <mat-form-field appearance="outline">
-                    <mat-label>nombre</mat-label>
-                    <input matInput type="text" formControlName="nombre" required />
-                </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>descripcion</mat-label>
+          <textarea matInput formControlName="descripcion" required></textarea>
+        </mat-form-field>
 
+        <mat-form-field appearance="outline">
+          <mat-label>sku</mat-label>
+          <input matInput type="text" formControlName="sku" required />
+        </mat-form-field>
+        <div class="grid md:flex mb-4">
+          <input
+            type="file"
+            id="fileInput"
+            (change)="onFileSelected($event)"
+            hidden />
+          <label
+            for="fileInput"
+            class="inline-block bg-primary hover:bg-primary-700 text-white font-normal py-2 px-4 rounded">
+            Seleccionar archivo
+          </label>
+          <span
+            class="w-full md:w-auto md:px-4 overflow-hidden whitespace-nowrap">
+            {{ selectedFileName }}
+          </span>
+        </div>
 
-                <mat-form-field appearance="outline">
-                    <mat-label>descripcion</mat-label>
-                    <textarea matInput formControlName="descripcion" required></textarea>
-                </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-chip-grid #chipList>
+            <mat-chip
+              *ngFor="let etiqueta of etiquetas"
+              [removable]="true"
+              (removed)="removerEtiqueta(etiqueta)">
+              {{ etiqueta }}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <input
+              #etiquetasInput
+              matInput
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="agregarEtiqueta($event)"
+              (blur)="onInputBlur($event)"
+              placeholder="Etiquetas" />
+          </mat-chip-grid>
+        </mat-form-field>
+      </div>
 
-                <mat-form-field appearance="outline">
-                    <mat-label>sku</mat-label>
-                    <input matInput type="text" formControlName="sku" required />
-                </mat-form-field>
-                <div class="grid md:flex mb-4">
-                    <input type="file" id="fileInput" (change)="onFileSelected($event)" hidden />
-                    <label for="fileInput"
-                        class=" inline-block bg-primary hover:bg-primary-700 text-white font-normal py-2 px-4 rounded">
-                        Seleccionar archivo
-                    </label>
-                    <span class="w-full md:w-auto md:px-4 overflow-hidden whitespace-nowrap">
-                        {{ selectedFileName}}
-                    </span>
-                </div>
+      <div class="grid md:grid-cols-2 gap-4">
+        <mat-form-field appearance="outline">
+          <mat-label>precio</mat-label>
+          <input matInput type="number" formControlName="precio" required />
+        </mat-form-field>
 
-                <mat-form-field appearance="outline">
-                    <mat-chip-grid #chipList>
-                        <mat-chip *ngFor="let etiqueta of etiquetas" [removable]="true"
-                            (removed)="removerEtiqueta(etiqueta)">
-                            {{ etiqueta }}
-                            <mat-icon matChipRemove>cancel</mat-icon>
-                        </mat-chip>
-                        <input #etiquetasInput matInput [matChipInputFor]="chipList"
-                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                            (matChipInputTokenEnd)="agregarEtiqueta($event)" (blur)="onInputBlur($event)"
-                            placeholder="Etiquetas">
+        <mat-form-field appearance="outline">
+          <mat-label>stock</mat-label>
+          <input matInput type="number" formControlName="stock" required />
+        </mat-form-field>
+      </div>
 
-                    </mat-chip-grid>
-                </mat-form-field>
+      <div class="flex justify-center mt-4 gap-4">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="!formGroup.valid">
+          Guardar
+        </button>
 
-
-            </div>
-
-
-            <div class="grid md:grid-cols-2 gap-4">
-                <mat-form-field appearance="outline">
-                    <mat-label>precio</mat-label>
-                    <input matInput type="number" formControlName="precio" required />
-                </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label>stock</mat-label>
-                    <input matInput type="number" formControlName="stock" required />
-                </mat-form-field>
-            </div>
-
-            <div class="flex justify-center mt-4 gap-4">
-                <button mat-raised-button color="primary" type="submit" [disabled]="!formGroup.valid">
-                    Guardar
-                </button>
-
-                <button mat-raised-button color="warn" type="button" (click)="closeDialog()">
-                    Cancelar
-                </button>
-            </div>
-        </form>
-    </mat-dialog-content>
+        <button
+          mat-raised-button
+          color="warn"
+          type="button"
+          (click)="closeDialog()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </mat-dialog-content>
 </div>

@@ -25,7 +25,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     private matDialog: MatDialog,
     private dialogService: DialogService
   ) {
-    this.dialogService.dialogClosed.subscribe((data) => {
+    this.dialogService.dialogClosed.subscribe(data => {
       if (data.refresh) {
         console.log('Evento recibido', data);
         this.spinner();
@@ -54,7 +54,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
         this.products = resp;
         console.log(this.products);
       },
-      error: (err) => {
+      error: err => {
         console.error(err);
       },
     });

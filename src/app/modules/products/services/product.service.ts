@@ -28,14 +28,9 @@ export class ProductService {
       // Si no hay un ID de producto, es una creación
       return this.http.post(`${environment.apiUrl}/products`, productFormData);
     }
-    // console.log(product);
+  }
 
-    // if (product._id) {
-    //   return this.http.put(
-    //     `${environment.apiUrl}/products/${product._id}`,
-    //     product
-    //   );
-    // }
-    // return this.http.post(`${environment.apiUrl}/products`, product);
+  deleteProduct(productId: string) {
+    return this.http.delete(`${environment.apiUrl}/products/${productId}`);
   }
 }

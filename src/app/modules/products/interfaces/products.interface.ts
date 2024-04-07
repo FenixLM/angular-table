@@ -7,6 +7,7 @@ export interface ProductInterface {
   etiquetas?: string[];
   precio?: number;
   stock?: number;
+  estado?: number;
 
   // Propiedad para almacenar el archivo de imagen en la solicitud
   imageFile?: any;

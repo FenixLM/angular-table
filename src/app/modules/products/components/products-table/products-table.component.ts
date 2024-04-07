@@ -1,9 +1,8 @@
 import {
   Component,
-  EventEmitter,
   Input,
+  OnChanges,
   OnInit,
-  Output,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
@@ -24,7 +23,7 @@ import { DialogService } from 'src/app/shared/service/dialog.service';
   templateUrl: './products-table.component.html',
   styleUrls: ['./products-table.component.scss'],
 })
-export class ProductsTableComponent implements OnInit {
+export class ProductsTableComponent implements OnInit, OnChanges {
   @Input() products: ProductInterface[] = [];
   @Input() loading: boolean = false;
 
@@ -87,7 +86,7 @@ export class ProductsTableComponent implements OnInit {
       disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       result && this.dialogService.dialogClosed.emit({ refresh: true });
     });
@@ -108,7 +107,7 @@ export class ProductsTableComponent implements OnInit {
       disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       result && this.dialogService.dialogClosed.emit({ refresh: true });
     });
@@ -125,10 +124,10 @@ export class ProductsTableComponent implements OnInit {
       disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(result => {
       if (result.aceptar) {
         this.productService.deleteProduct(product._id!).subscribe({
-          next: (resp) => {
+          next: resp => {
             console.log(resp);
             this.aviso(
               'done',
@@ -137,7 +136,7 @@ export class ProductsTableComponent implements OnInit {
             );
             this.dialogService.dialogClosed.emit({ refresh: true });
           },
-          error: (err) => {
+          error: err => {
             console.error(err);
           },
         });

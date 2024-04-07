@@ -10,7 +10,7 @@ export class FormDataService {
   convertToFormData(formGroup: FormGroup): FormData {
     const formData = new FormData();
 
-    Object.keys(formGroup.controls).forEach((key) => {
+    Object.keys(formGroup.controls).forEach(key => {
       const control = formGroup.controls[key];
       formData.append(key, control.value);
     });

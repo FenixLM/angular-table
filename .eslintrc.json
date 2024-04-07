@@ -9,11 +9,16 @@
         "createDefaultProgram": true
       },
       "extends": [
+        "plugin:prettier/recommended",
+        "prettier",
+        "eslint:recommended",
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
-        "plugin:prettier/recommended"
+        "plugin:@typescript-eslint/recommended"
       ],
       "rules": {
+        "no-console": "warn",
+        "no-var": "error",
         "@angular-eslint/component-class-suffix": [
           "error",
           {

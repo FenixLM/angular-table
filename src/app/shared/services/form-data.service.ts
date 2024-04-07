@@ -5,8 +5,6 @@ import { FormGroup } from '@angular/forms';
   providedIn: 'root',
 })
 export class FormDataService {
-  constructor() {}
-
   convertToFormData(formGroup: FormGroup): FormData {
     const formData = new FormData();
 

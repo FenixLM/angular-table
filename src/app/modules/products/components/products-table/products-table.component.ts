@@ -25,7 +25,7 @@ import { DialogService } from 'src/app/shared/service/dialog.service';
 })
 export class ProductsTableComponent implements OnInit, OnChanges {
   @Input() products: ProductInterface[] = [];
-  @Input() loading: boolean = false;
+  @Input() loading = false;
 
   // @Output() deleteProduct: EventEmitter<{
   //   deleted: boolean;

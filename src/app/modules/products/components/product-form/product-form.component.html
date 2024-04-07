@@ -20,22 +20,16 @@
                     <mat-label>sku</mat-label>
                     <input matInput type="text" formControlName="sku" required />
                 </mat-form-field>
-                <div class="grid md:flex">
+                <div class="grid md:flex mb-4">
                     <input type="file" id="fileInput" (change)="onFileSelected($event)" hidden />
-                    <button mat-raised-button color="primary" type="button" class="w-full">
-                        <label for="fileInput">
-                            Seleccionar archivo
-                        </label>
-                    </button>
+                    <label for="fileInput"
+                        class=" inline-block bg-primary hover:bg-primary-700 text-white font-normal py-2 px-4 rounded">
+                        Seleccionar archivo
+                    </label>
                     <span class="w-full md:w-auto md:px-4 overflow-hidden whitespace-nowrap">
                         {{ selectedFileName}}
                     </span>
                 </div>
-
-                <!-- <mat-form-field appearance="outline">
-                    <mat-label>etiquetas</mat-label>
-                    <input matInput type="text" formControlName="etiquetas" required />
-                </mat-form-field> -->
 
                 <mat-form-field appearance="outline">
                     <mat-chip-grid #chipList>

@@ -1,4 +1,5 @@
 export interface ProductInterface {
+  _id?: string;
   nombre?: string;
   descripcion?: string;
   sku?: string;

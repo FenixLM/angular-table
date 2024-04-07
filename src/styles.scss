@@ -55,13 +55,13 @@ $front-colocapayments-theme: mat.define-light-theme(
 
 @include mat.all-component-themes($front-colocapayments-theme);
 
-@layer reset, table,customMaterial;
+@layer reset, table, customMaterial;
 
 @layer customMaterial {
-  .custom-dialog-container-tp .mat-dialog-container {
+  .custom-dialog-container-tp > .mat-mdc-dialog-container .mdc-dialog__surface {
     padding: 0px !important;
-    box-shadow: none;
-    background: rgba(0, 0, 0, 0);
+    box-shadow: none !important;
+    background: rgba(0, 0, 0, 0) !important;
   }
 }
 

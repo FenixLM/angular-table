@@ -14,7 +14,7 @@ export class ProductService {
     return products;
   }
 
-  saveProduct(product: ProductInterface) {
+  saveProduct(product: any) {
     console.log('Product created', product);
     return this.http.post(`${environment.apiUrl}/products`, product);
   }

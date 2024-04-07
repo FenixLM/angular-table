@@ -20,11 +20,17 @@
                     <mat-label>sku</mat-label>
                     <input matInput type="text" formControlName="sku" required />
                 </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label>imagen</mat-label>
-                    <input matInput type="text" formControlName="imagen" required />
-                </mat-form-field>
+                <div class="grid md:flex">
+                    <input type="file" id="fileInput" (change)="onFileSelected($event)" hidden />
+                    <button mat-raised-button color="primary" type="button" class="w-full">
+                        <label for="fileInput">
+                            Seleccionar archivo
+                        </label>
+                    </button>
+                    <span class="w-full md:w-auto md:px-4 overflow-hidden whitespace-nowrap">
+                        {{ selectedFileName}}
+                    </span>
+                </div>
 
                 <mat-form-field appearance="outline">
                     <mat-label>etiquetas</mat-label>
@@ -36,18 +42,22 @@
             <div class="grid md:grid-cols-2 gap-4">
                 <mat-form-field appearance="outline">
                     <mat-label>precio</mat-label>
-                    <input matInput type="text" formControlName="precio" required />
+                    <input matInput type="number" formControlName="precio" required />
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
                     <mat-label>stock</mat-label>
-                    <input matInput type="text" formControlName="stock" required />
+                    <input matInput type="number" formControlName="stock" required />
                 </mat-form-field>
             </div>
 
-            <div class="flex justify-center mt-4">
+            <div class="flex justify-center mt-4 gap-4">
                 <button mat-raised-button color="primary" type="submit" [disabled]="!formGroup.valid">
                     Guardar
+                </button>
+
+                <button mat-raised-button color="warn" type="button" (click)="closeDialog()">
+                    Cancelar
                 </button>
             </div>
         </form>

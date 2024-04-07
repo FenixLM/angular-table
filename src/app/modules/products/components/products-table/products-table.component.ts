@@ -15,6 +15,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { AlertaComponent } from 'src/app/shared/components/alerta/alerta.component';
 import { AlertaInterface } from 'src/app/shared/interfaces/alerta.interface';
+import { ProductService } from '../../services/product.service';
+import { AvisoComponent } from 'src/app/shared/components/aviso/aviso.component';
+import { DialogService } from 'src/app/shared/service/dialog.service';
 
 @Component({
   selector: 'app-products-table',
@@ -25,15 +28,19 @@ export class ProductsTableComponent implements OnInit {
   @Input() products: ProductInterface[] = [];
   @Input() loading: boolean = false;
 
-  @Output() deleteProduct: EventEmitter<{
-    deleted: boolean;
-    product: ProductInterface;
-  }> = new EventEmitter<{ deleted: boolean; product: ProductInterface }>();
+  // @Output() deleteProduct: EventEmitter<{
+  //   deleted: boolean;
+  //   product: ProductInterface;
+  // }> = new EventEmitter<{ deleted: boolean; product: ProductInterface }>();
 
-  @Output() dialogClosed: EventEmitter<void> = new EventEmitter<void>();
+  // @Output() dialogClosed: EventEmitter<void> = new EventEmitter<void>();
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private matDialog: MatDialog,
+    private productService: ProductService,
+    private dialogService: DialogService
+  ) {}
 
   displayedColumns: string[] = [
     'nombre',
@@ -74,7 +81,7 @@ export class ProductsTableComponent implements OnInit {
   }
 
   openDialogCreate() {
-    const dialogRef = this.dialog.open(ProductFormComponent, {
+    const dialogRef = this.matDialog.open(ProductFormComponent, {
       width: '600px',
       data: { title: 'CREAR PRODUCTO' },
       disableClose: true,
@@ -82,12 +89,12 @@ export class ProductsTableComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
-      this.dialogClosed.emit();
+      result && this.dialogService.dialogClosed.emit({ refresh: true });
     });
   }
 
   openDialogDetail(product: ProductInterface) {
-    const dialogRef = this.dialog.open(ProductDetailComponent, {
+    const dialogRef = this.matDialog.open(ProductDetailComponent, {
       width: '600px',
       data: { product },
       disableClose: true,
@@ -95,7 +102,7 @@ export class ProductsTableComponent implements OnInit {
   }
 
   openDialogEdit(product: ProductInterface) {
-    const dialogRef = this.dialog.open(ProductFormComponent, {
+    const dialogRef = this.matDialog.open(ProductFormComponent, {
       width: '600px',
       data: { title: 'EDITAR PRODUCTO', product },
       disableClose: true,
@@ -103,17 +110,16 @@ export class ProductsTableComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
-      this.dialogClosed.emit();
+      result && this.dialogService.dialogClosed.emit({ refresh: true });
     });
   }
-
   openDialogDelete(product: ProductInterface) {
     const dataAlerta: AlertaInterface = {
       iconFont: 'delete',
       titulo: 'Eliminar Producto',
       mensaje: `¿Está seguro de eliminar el producto ${product.nombre}?`,
     };
-    const dialogRef = this.dialog.open(AlertaComponent, {
+    const dialogRef = this.matDialog.open(AlertaComponent, {
       width: '600px',
       data: dataAlerta,
       disableClose: true,
@@ -121,10 +127,35 @@ export class ProductsTableComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result.aceptar) {
-        console.log('Eliminar producto', product);
-        this.deleteProduct.emit({ deleted: result.aceptar, product: product });
-        this.dialogClosed.emit();
+        this.productService.deleteProduct(product._id!).subscribe({
+          next: (resp) => {
+            console.log(resp);
+            this.aviso(
+              'done',
+              'Producto eliminado',
+              'El producto ha sido eliminado'
+            );
+            this.dialogService.dialogClosed.emit({ refresh: true });
+          },
+          error: (err) => {
+            console.error(err);
+          },
+        });
       }
+    });
+  }
+
+  aviso(iconFont: string, titulo?: string, mensaje?: string) {
+    return this.matDialog.open(AvisoComponent, {
+      id: 'avisoDialog',
+      width: '450px',
+      height: 'auto',
+      panelClass: '',
+      data: {
+        iconFont,
+        titulo,
+        mensaje,
+      },
     });
   }
 }

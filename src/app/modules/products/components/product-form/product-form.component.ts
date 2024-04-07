@@ -65,7 +65,7 @@ export class ProductFormComponent {
 
     this.productService.saveProduct(formData, this.productId).subscribe({
       next: (resp) => {
-        this.matDialogRef.close();
+        this.matDialogRef.close(true);
         this.aviso('done', '¡Éxito!', 'Producto guardado con éxito');
       },
       error: (err: any) => {

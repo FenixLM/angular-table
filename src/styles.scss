@@ -28,7 +28,7 @@ $green-palette-custom: (
     300: #000,
     400: #000,
     500: #fff,
-    600:#fff,
+    600: #fff,
     700: #fff,
     800: #fff,
     900: #fff,
@@ -55,7 +55,15 @@ $front-colocapayments-theme: mat.define-light-theme(
 
 @include mat.all-component-themes($front-colocapayments-theme);
 
-@layer reset, table;
+@layer reset, table,customMaterial;
+
+@layer customMaterial {
+  .custom-dialog-container-tp .mat-dialog-container {
+    padding: 0px !important;
+    box-shadow: none;
+    background: rgba(0, 0, 0, 0);
+  }
+}
 
 @layer reset {
   *,

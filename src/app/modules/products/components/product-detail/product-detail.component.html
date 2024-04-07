@@ -43,11 +43,11 @@
     </div>
     <hr class="my-4 border-t-2 border-gray-100" />
     <div class="flex justify-center mt-4 gap-4">
-        <button mat-raised-button color="accent">
+        <button mat-raised-button color="accent" (click)="openDialogEdit(product)">
             Editar
         </button>
 
-        <button mat-raised-button color="warn">
+        <button mat-raised-button color="warn" (click)="openDialogDelete(product)">
             Eliminar
         </button>
     </div>
